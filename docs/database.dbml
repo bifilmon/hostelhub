@@ -1,1 +1,40 @@
+Table hostels {
+  hostel_id int [pk, increment]
+  name varchar
+  address text
+  city varchar
+  state varchar
+  postal_code varchar
+  phone varchar
+  email varchar
+  created_at timestamp
+  updated_at timestamp
+}
 
+Table floors {
+  floor_id int [pk, increment]
+  hostel_id int
+  floor_number int
+  name varchar
+}
+
+Table rooms {
+  room_id int [pk, increment]
+  floor_id int
+  room_number varchar
+  capacity int
+  status varchar
+}
+
+Table beds {
+  bed_id int [pk, increment]
+  room_id int
+  bed_number varchar
+  status varchar
+}
+
+Ref: floors.hostel_id > hostels.hostel_id
+
+Ref: rooms.floor_id > floors.floor_id
+
+Ref: beds.room_id > rooms.room_id
