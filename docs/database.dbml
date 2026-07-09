@@ -38,3 +38,57 @@ Ref: floors.hostel_id > hostels.hostel_id
 Ref: rooms.floor_id > floors.floor_id
 
 Ref: beds.room_id > rooms.room_id
+
+Table residents {
+  resident_id int [pk, increment]
+
+  first_name varchar(100) [not null]
+  last_name varchar(100)
+
+  date_of_birth date
+  gender varchar(20)
+  blood_group varchar(10)
+
+  phone varchar(20) [not null]
+  email varchar(150)
+
+  government_id_type varchar(50)
+  government_id_number varchar(100)
+
+  occupation_type varchar(20)
+
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table guardians {
+  guardian_id int [pk, increment]
+
+  resident_id int [not null]
+
+  name varchar(150) [not null]
+  relationship varchar(50)
+
+  phone varchar(20)
+  email varchar(150)
+
+  address text
+
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table documents {
+  document_id int [pk, increment]
+
+  resident_id int [not null]
+
+  document_type varchar(50)
+  file_name varchar(255)
+  file_path varchar(500)
+
+  uploaded_at timestamp
+}
+
+Ref: guardians.resident_id > residents.resident_id
+Ref: documents.resident_id > residents.resident_id
